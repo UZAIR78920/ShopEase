@@ -69,6 +69,9 @@ const productGrid = document.querySelector("#product-grid");
 const productCount = document.querySelector("#product-count");
 const emptyState = document.querySelector("#empty-state");
 const filterButtons = document.querySelectorAll(".filter-button");
+const searchInput = document.querySelector("#product-search");
+const priceSort = document.querySelector("#price-sort");
+let selectedCategory = "All";
 const priceFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -126,11 +129,24 @@ function createProductCard(product) {
   return card;
 }
 
-function renderProducts(category = "All") {
-  const visibleProducts =
-    category === "All"
-      ? products
-      : products.filter((product) => product.category === category);
+function renderProducts() {
+  const searchTerm = searchInput.value.trim().toLocaleLowerCase();
+  const visibleProducts = products
+    .filter((product) => {
+      const matchesCategory =
+        selectedCategory === "All" || product.category === selectedCategory;
+      const matchesSearch = product.name.toLocaleLowerCase().includes(searchTerm);
+      return matchesCategory && matchesSearch;
+    })
+    .sort((first, second) => {
+      if (priceSort.value === "price-ascending") {
+        return first.price - second.price;
+      }
+      if (priceSort.value === "price-descending") {
+        return second.price - first.price;
+      }
+      return 0;
+    });
 
   productGrid.replaceChildren(...visibleProducts.map(createProductCard));
   productCount.textContent = `${visibleProducts.length} ${
@@ -141,14 +157,17 @@ function renderProducts(category = "All") {
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const category = button.dataset.category;
+    selectedCategory = button.dataset.category;
     filterButtons.forEach((filterButton) => {
       const isActive = filterButton === button;
       filterButton.classList.toggle("is-active", isActive);
       filterButton.setAttribute("aria-pressed", String(isActive));
     });
-    renderProducts(category);
+    renderProducts();
   });
 });
+
+searchInput.addEventListener("input", renderProducts);
+priceSort.addEventListener("change", renderProducts);
 
 renderProducts();

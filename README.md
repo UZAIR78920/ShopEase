@@ -8,7 +8,7 @@ ShopEase/
 |   `-- images/       # Reserved for local product images
 |-- index.html        # Product catalog page
 |-- style.css         # Catalog layout and responsive styles
-|-- script.js         # Product data, rendering, and category filters
+|-- script.js         # Product data, rendering, search, filters, and sorting
 `-- README.md
 ```
 
@@ -17,5 +17,11 @@ ShopEase/
 - Displays products in a responsive grid with an image, name, price, and rating.
 - Filters the catalog by Electronics, Accessories, Home, and Clothing.
 - Product images are loaded from Unsplash; an internet connection is needed to display them.
+
+## Feature 2: Search, Filter and Sort
+
+- Searches products by name and filters by category.
+- Sorts prices from low to high or high to low.
+- Shows a no-results message when no products match the current search and category.
 
 Open `index.html` in a browser to view the catalog. No build tools or dependencies are required.
