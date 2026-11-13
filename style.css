@@ -110,12 +110,45 @@ h1 span {
 
 .catalog-toolbar {
   display: flex;
-  min-height: 54px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  gap: 15px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.catalog-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-input,
+.sort-select {
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  background: var(--surface);
+  font: 500 12px/1.2 "DM Sans", sans-serif;
+}
+
+.search-input {
+  width: min(100%, 390px);
+  padding: 0 13px;
+}
+
+.sort-select {
+  flex: 0 0 190px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.search-input:focus,
+.sort-select:focus {
+  border-color: var(--accent);
+  outline: 3px solid #e8b5a7;
+  outline-offset: 2px;
 }
 
 .category-filters {
@@ -123,6 +156,7 @@ h1 span {
   gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
+  padding-top: 2px;
 }
 
 .category-filters::-webkit-scrollbar {
@@ -159,7 +193,7 @@ h1 span {
 
 .product-count {
   flex: 0 0 auto;
-  margin: 0;
+  margin: 0 0 0 auto;
   color: var(--muted);
   font-size: 12px;
 }
@@ -316,11 +350,18 @@ h1 span {
     font-size: 13px;
   }
 
-  .catalog-toolbar {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 12px;
+  .catalog-controls {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .sort-select {
+    flex: 1 1 180px;
   }
 
   .category-filters {
@@ -330,10 +371,6 @@ h1 span {
 
   .filter-button {
     padding: 8px 12px;
-  }
-
-  .product-count {
-    padding-left: 3px;
   }
 
   .product-grid {

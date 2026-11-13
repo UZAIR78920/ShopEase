@@ -37,6 +37,21 @@
 
       <section class="catalog" aria-label="Product catalog">
         <div class="catalog-toolbar">
+          <div class="catalog-controls">
+            <input
+              class="search-input"
+              id="product-search"
+              type="search"
+              placeholder="Search products..."
+              aria-label="Search products by name"
+            />
+            <select class="sort-select" id="price-sort" aria-label="Sort products by price">
+              <option value="featured">Featured</option>
+              <option value="price-ascending">Price: Low to High</option>
+              <option value="price-descending">Price: High to Low</option>
+            </select>
+            <p class="product-count" id="product-count" aria-live="polite"></p>
+          </div>
           <div
             class="category-filters"
             role="group"
@@ -58,12 +73,11 @@
               Clothing
             </button>
           </div>
-          <p class="product-count" id="product-count" aria-live="polite"></p>
         </div>
 
         <div class="product-grid" id="product-grid" aria-live="polite"></div>
-        <p class="empty-state" id="empty-state" hidden>
-          There are no products in this category yet.
+        <p class="empty-state" id="empty-state" role="status" hidden>
+          No products match your search and filters. Try changing your selections.
         </p>
       </section>
     </main>
